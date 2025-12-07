@@ -17,6 +17,7 @@ object Generator extends App
     val parser = new OptionParser[Options]("generator/run") {
       opt[String]('C', "config") valueName("<file>") text("config file") action {(s: String, c) => c.copy(confFileName = s)}
       opt[String]('o', "output") valueName("<filename>") text("output filename") action {(s: String, c) => c.copy(outFileName = s)}
+      opt[Int]('n', "numfiles") valueName("<num_files>") text("number of output files") action {(n: Int, c) => c.copy(numOutFiles = n)}
     }
     parser.parse(args, Options()) match {
       case Some(opts) =>
