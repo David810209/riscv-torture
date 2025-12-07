@@ -10,18 +10,19 @@ default: all
 # Sources
 #--------------------------------------------------------------------
 
-asm_tests = \
-	test.S \
+# asm_tests = \
+# 	test.S \
 
-extra_files = 
-
+# extra_files = 
+asm_tests =  $(wildcard *.S)
 #--------------------------------------------------------------------
 # Build rules
 #--------------------------------------------------------------------
 
-RISCV_GCC = riscv64-unknown-elf-gcc
-RISCV_GCC_OPTS = -nostdlib -nostartfiles -Wa,-march=RVIMAFDXhwacha
-RISCV_OBJDUMP = riscv64-unknown-elf-objdump --disassemble-all --section=.text --section=.data --section=.bss
+RISCV_GCC = riscv32-unknown-elf-gcc
+RISCV_GCC_OPTS = -nostdlib -nostartfiles -Wa,-march=rv32im
+# RISCV_OBJDUMP = riscv32-unknown-elf-objdump --disassemble-all --section=.text --section=.data --section=.bss
+RISCV_OBJDUMP = riscv32-unknown-elf-objdump -S
 RISCV_SIM = spike --extension=hwacha
 
 #------------------------------------------------------------
@@ -35,11 +36,11 @@ asm_tests_hex  = $(addsuffix .hex,  $(asm_tests_bin))
 $(asm_tests_dump): %.dump: %
 	$(RISCV_OBJDUMP) $< > $@
 
-$(asm_tests_bin): %: %.S $(extra_files)
+$(asm_tests_bin): %: %.S
 	$(RISCV_GCC) $(RISCV_GCC_OPTS) -I../env/p -T../env/p/link.ld $< -o $@
 
-$(asm_tests_hex): %.hex: % $(extra_files)
-	elf2hex 16 16384 $< > $@
+$(asm_tests_hex): %.hex: %
+	elf2hex 8 2097152 $< > $@
 
 $(asm_tests_sig): %.sig: %
 	$(RISCV_SIM) +signature=$@ $<
@@ -56,7 +57,7 @@ junk += $(asm_tests_bin) $(asm_tests_dump) $(asm_tests_sig) $(asm_tests_hex)
 #------------------------------------------------------------
 # Default
 
-all: $(asm_tests_dump) $(asm_tests_hex)
+all: $(asm_tests_dump)
 
 #------------------------------------------------------------
 # Clean up
@@ -65,4 +66,4 @@ clean:
 	rm -rf $(junk)
 
 clean-all: clean
-	rm -rf test*.S test*.stats test*.hex test*.out test*.dump test test_1* test_pseg_* schad* failedtests/*
+	rm -rf test*.stats test*.hex test*.out test*.dump test test_1* test_pseg_* schad* failedtests/*

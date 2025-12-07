@@ -1,3 +1,22 @@
+error id: file://<WORKSPACE>/generator/src/main/scala/SeqBranch.scala:`<none>`.
+file://<WORKSPACE>/generator/src/main/scala/SeqBranch.scala
+empty definition using pc, found symbol in pc: `<none>`.
+empty definition using semanticdb
+empty definition using fallback
+non-local guesses:
+	 -Rand.reg_read_zero.
+	 -Rand.reg_read_zero#
+	 -Rand.reg_read_zero().
+	 -reg_read_zero.
+	 -reg_read_zero#
+	 -reg_read_zero().
+	 -scala/Predef.reg_read_zero.
+	 -scala/Predef.reg_read_zero#
+	 -scala/Predef.reg_read_zero().
+offset: 2343
+uri: file://<WORKSPACE>/generator/src/main/scala/SeqBranch.scala
+text:
+```scala
 package torture
 
 import scala.collection.mutable.ArrayBuffer
@@ -74,7 +93,7 @@ class SeqBranch(xregs: HWRegPool) extends InstSeq
     val reg_one = reg_write_visible(xregs)
     val reg_mask = reg_write_visible(xregs)
 
-    insts += ADDI(reg_one, reg_read_zero(xregs), Imm(1))
+    insts += ADDI(reg_one, reg_read_@@zero(xregs), Imm(1))
     insts += SLL(reg_one, reg_one, Imm(31))
     insts += ADDI(reg_mask, reg_read_zero(xregs), Imm(-1))
     insts += XOR(reg_mask, reg_mask, reg_one)
@@ -201,3 +220,10 @@ class SeqBranch(xregs: HWRegPool) extends InstSeq
 
   rand_pick(candidates)()
 }
+
+```
+
+
+#### Short summary: 
+
+empty definition using pc, found symbol in pc: `<none>`.

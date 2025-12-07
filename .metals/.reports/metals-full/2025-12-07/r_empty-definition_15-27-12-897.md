@@ -1,3 +1,22 @@
+error id: file://<WORKSPACE>/generator/src/main/scala/main.scala:`<none>`.
+file://<WORKSPACE>/generator/src/main/scala/main.scala
+empty definition using pc, found symbol in pc: `<none>`.
+empty definition using semanticdb
+empty definition using fallback
+non-local guesses:
+	 -scala/collection/JavaConversions.generate_loop.
+	 -scala/collection/JavaConversions.generate_loop#
+	 -scala/collection/JavaConversions.generate_loop().
+	 -generate_loop.
+	 -generate_loop#
+	 -generate_loop().
+	 -scala/Predef.generate_loop.
+	 -scala/Predef.generate_loop#
+	 -scala/Predef.generate_loop().
+offset: 801
+uri: file://<WORKSPACE>/generator/src/main/scala/main.scala
+text:
+```scala
 package torture
 package generator
 
@@ -20,7 +39,7 @@ object Generator extends App
     }
     parser.parse(args, Options()) match {
       case Some(opts) =>
-        generate_loop(opts.confFileName, opts.outFileName, opts.numOutFiles)
+        @@generate_loop(opts.confFileName, opts.outFileName, opts.numOutFiles)
       case None =>
         System.exit(1) //error message printed by parser
     }
@@ -44,14 +63,7 @@ object Generator extends App
     val loop_size = config.getProperty("torture.generator.loop_size", "256").toInt
     generate(nseqs, memsize, fprnd, mix, vec, use_amo, use_mul, use_div, outFileName, segment, loop, loop_size)
   }
-  def generate_loop(confFile: String, outFileName: String, numOutFiles: Int) = {
-    if (numOutFiles > 0) {
-      for (i <- 0 to (numOutFiles-1))
-        generate(confFile, outFileName + ("_%03d" format (i)))
-      } else {
-        generate(confFile, outFileName)
-      }
-    }
+
   def generate(nseqs: Int, memsize: Int, fprnd : Int, mix: Map[String,Int], veccfg: Map[String,String], use_amo: Boolean, use_mul: Boolean, use_div: Boolean, outFileName: String, segment : Boolean, loop : Boolean, loop_size : Int): String = {
     assert (mix.values.sum == 100, println("The instruction mix specified in config does not add up to 100%"))
     assert (mix.keys.forall(List("xmem","xbranch","xalu","fgen","fpmem","fax","fdiv","vec") contains _), println("The instruction mix specified in config contains an unknown sequence type name"))
@@ -81,3 +93,10 @@ object Generator extends App
   }
 }
 
+
+```
+
+
+#### Short summary: 
+
+empty definition using pc, found symbol in pc: `<none>`.

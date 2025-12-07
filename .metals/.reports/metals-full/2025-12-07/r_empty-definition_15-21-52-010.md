@@ -1,3 +1,22 @@
+error id: file://<WORKSPACE>/generator/src/main/scala/Rand.scala:`<none>`.
+file://<WORKSPACE>/generator/src/main/scala/Rand.scala
+empty definition using pc, found symbol in pc: `<none>`.
+empty definition using semanticdb
+empty definition using fallback
+non-local guesses:
+	 -scala/util/Random.nextInt.
+	 -scala/util/Random.nextInt#
+	 -scala/util/Random.nextInt().
+	 -Random.nextInt.
+	 -Random.nextInt#
+	 -Random.nextInt().
+	 -scala/Predef.Random.nextInt.
+	 -scala/Predef.Random.nextInt#
+	 -scala/Predef.Random.nextInt().
+offset: 325
+uri: file://<WORKSPACE>/generator/src/main/scala/Rand.scala
+text:
+```scala
 package torture
 
 import scala.util.Random
@@ -12,7 +31,7 @@ object Rand
   {
     var span = high - low + 1
     if (low > high) span = low - high + 1
-    low + Random.nextInt(span)
+    low + Random.nextIn@@t(span)
   }
 
   def rand_shamt() = rand_range(0, 31)
@@ -84,3 +103,10 @@ object Rand
     }
   }
 }
+
+```
+
+
+#### Short summary: 
+
+empty definition using pc, found symbol in pc: `<none>`.
